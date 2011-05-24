@@ -108,7 +108,7 @@ class UnitTest {
 	 * Assert that two values are equal ( == )
 	 */
 	public function assert_equal($one, $two, $message = '') {
-		$message = ($message) ? $message : "$one doesn't equal $two";
+		$message = ($message) ? $message : $this->_($one) . " doesn't equal " . $this->_($two);
 		$this->assert(($one == $two), $message);
 	}
 	
@@ -116,7 +116,7 @@ class UnitTest {
 	 * Assert that two values are not equal ( !== )
 	 */
 	public function assert_not_equal($one, $two, $message = '') {
-		$message = ($message) ? $message : "$one equals $two, and it shouldn't!";
+		$message = ($message) ? $message : $this->_($one) . " equals " . $this->_($two) . ", and it shouldn't!";
 		$this->assert(($one !== $two), $message);
 	}
 	
@@ -124,7 +124,7 @@ class UnitTest {
 	 * Assert that two values are equivalent ( === )
 	 */
 	public function assert_equivalent($one, $two, $message = '') {
-		$message = ($message) ? $message : "$one is not equivalent to $two";
+		$message = ($message) ? $message : $this->_($one) . " is not equivalent to " . $this->_($two);
 		$this->assert(($one === $two), $message);
 	}
 	
@@ -177,10 +177,6 @@ class UnitTest {
 		restore_error_handler();
 		
 		$this->end_time = microtime(TRUE);
-	}
-	
-	public function error_handler($no, $str) {
-		$this->error($str);
 	}
 	
 	/**
@@ -262,6 +258,29 @@ class UnitTest {
 			 " assertion(s) in " . 
 			 number_format(($this->end_time - $this->start_time), 6) . 
 			 " seconds");
+	}
+	
+	/* --------------------------------------------------------------
+	 * UTILITY/HELPERS
+	 * ------------------------------------------------------------ */
+	
+	/**
+	 * Handle PHP errors
+	 */
+	public function error_handler($no, $str) {
+		$this->error($str);
+	}
+	
+	/**
+	 * Format a value and return it as an
+	 * output friendly string
+	 */
+	public function _($value) {
+		if (is_null($value)) {
+			return 'NULL';
+		} else {
+			return $value;
+		}
 	}
 }
 
