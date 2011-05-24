@@ -77,21 +77,48 @@ class UnitTest {
 	 * ------------------------------------------------------------ */
 	
 	/**
-	 * Assert that an expression meets TRUE boolean. The
+	 * Assert that an expression is TRUE boolean. The
 	 * base for all the other assertions
 	 */
 	public function assert($expression, $message = '') {
 		if ((bool)($expression) == TRUE) {
 			$this->success();
 		} else {
-			$message = ($message) ? $message : (string)($expression) . " did not equate to TRUE";
+			$message = ($message) ? $message : (string)($expression) . " doesn't equate to TRUE";
 			throw new UnitTestFailure($message);
 		}
 	}
+	public function assert_true($e, $m) { $this->assert($e, $m); }
 	
+	/**
+	 * Assert that the expression is FALSE
+	 */
+	public function assert_false($expression, $message = '') {
+		$this->assert(!$expression, $message);
+	}
+	
+	/**
+	 * Assert that two values are equal ( == )
+	 */
 	public function assert_equal($one, $two, $message = '') {
-		$message = ($message) ? $message : "$one did not equal $two";
+		$message = ($message) ? $message : "$one doesn't equal $two";
 		$this->assert(($one == $two), $message);
+	}
+	
+	/**
+	 * Assert that two values are not equal ( !== )
+	 */
+	public function assert_not_equal($one, $two, $message = '') {
+		$message = ($message) ? $message : "$one equals $two, and it shouldn't!";
+		$this->assert(($one !== $two), $message);
+	}
+	
+	/**
+	 * Assert that two values are equivalent ( === )
+	 */
+	public function assert_equivalent($one, $two, $message = '') {
+		$message = ($message) ? $message : "$one is not equivalent to $two";
+		$this->assert(($one === $two), $message);
 	}
 	
 	/* --------------------------------------------------------------
