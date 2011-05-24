@@ -19,3 +19,5 @@ class CalculatorTest extends UnitTest {
 		$this->assert_equal(Calculator::add(1, 2), 3);
 	}
 }
+
+UnitTest::test();

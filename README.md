@@ -9,7 +9,7 @@ Inferno is a really quick, lightweight and simple to use PHP unit testing soluti
 
 ## Usage
 
-Grab a copy of the source from here or by cloning it. Then simply require the **inferno.php** file in your test file. Each file maps to a test case. A test case is any class that inherits from `UnitTest`.
+Grab a copy of the source from here or by cloning it. Then simply require the **inferno.php** file in your test file and call `UnitTest::test()`. Each file maps to a test case. A test case is any class that inherits from `UnitTest`.
 
 ## Example
 
@@ -24,6 +24,8 @@ class CalculatorTest extends UnitTest {
 		$this->assert_equal(Calculator::add(1, 2), 3);
 	}
 }
+
+Inferno::test();
 ```
 
 We can then run the tests by calling `php tests/calculator_test.php`:
