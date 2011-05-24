@@ -21,9 +21,13 @@ class UnitTest {
 	 * VARIABLES
 	 * ------------------------------------------------------------ */
 	
-	protected $results = array();
-	protected $tests = array();
-	protected $current_test = '';
+	protected $results 			= array();
+	protected $tests 			= array();
+	protected $current_test 	= '';
+	                        	
+	protected $start_time 		= 0;
+	protected $end_time 		= 0;
+	protected $assertion_count	= 0;
 	
 	/* --------------------------------------------------------------
 	 * AUTORUNNER
@@ -97,7 +101,6 @@ class UnitTest {
 	public function run() {
 		$this->get_tests();
 		$this->run_tests();
-		die(var_dump($this));
 		$this->print_results();
 	}
 	
@@ -119,6 +122,8 @@ class UnitTest {
 	 * Run each test
 	 */
 	public function run_tests() {
+		$this->start_time = microtime(TRUE);
+		
 		foreach ($this->tests as $test) {
 			$this->current_test = $test;
 			
@@ -130,6 +135,89 @@ class UnitTest {
 				}
 			}
 		}
+		
+		$this->end_time = microtime(TRUE);
+	}
+	
+	/**
+	 * Loop through the test results and output them
+	 * to the console!
+	 */
+	public function print_results() {
+		$failures = array();
+		$errors = array();
+		$good = TRUE;
+		
+		// Print out the running status of each method.
+		foreach ($this->results as $unit_test => $results) {
+			foreach ($results as $result => $values) {
+				foreach ($values as $value) {
+					$this->assertion_count++;
+					
+					switch ($result) {
+						case 'failures': echo('✘ '); $failures[$unit_test][] = $value; break;
+						case 'errors': echo('! '); $errors[$unit_test][] = $value; break;
+					
+						default:
+						case 'successes': echo('✓ '); break;
+					}
+				}
+			}
+		}
+		
+		echo("\n----------------------------------\n\n");
+		
+		// Do we have any failures?
+		if ($failures) {
+			$good = FALSE;
+			
+			foreach ($failures as $unit_test => $messages) {
+				echo("Failures!\n");
+				echo("=========\n\n");
+				
+				echo($unit_test . "():\n");
+				
+				foreach ($messages as $message) {
+					echo("\t- " . $message);
+				}
+				
+				echo("\n");
+			}
+			
+			echo("\n----------------------------------\n\n");
+		}
+		
+		// Do we have any failures?
+		if ($errors) {
+			$good = FALSE;
+			
+			foreach ($errors as $unit_test => $messages) {
+				echo("Errors!\n");
+				echo("=======\n\n");
+				
+				echo($unit_test . "():\n");
+				
+				foreach ($messages as $message) {
+					echo("\t- " . $message);
+				}
+			}
+			
+			echo("\n----------------------------------\n\n");
+		}
+		
+		// Good or bad?
+		if ($good) {
+			echo("Cool! All your tests ran perfectly.\n");
+		} else {
+			echo("Not so cool :( there was a problem running your tests!\n");
+		}
+		
+		// Finally, test stats
+		echo("Ran " . 
+			 $this->assertion_count . 
+			 " assertion(s) in " . 
+			 number_format(($this->end_time - $this->start_time), 6) . 
+			 " seconds");
 	}
 }
 
