@@ -6,9 +6,9 @@
  * PHP unit testing library
  *
  * @author Jamie Rumbelow <http://jamierumbelow.net>
- * @version 0.1.0
+ * @version 0.1.0-pre
  * @copyright Copyright (c)2011 Jamie Rumbelow
- * @package default
+ * @package inferno
  **/
 
 require 'lib/calculator.php';
