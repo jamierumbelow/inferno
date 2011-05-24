@@ -207,9 +207,9 @@ class UnitTest {
 		
 		// Good or bad?
 		if ($good) {
-			echo("Cool! All your tests ran perfectly.\n");
+			echo("\033[0;32mCool! All your tests ran perfectly.\033[0m\n");
 		} else {
-			echo("Not so cool :( there was a problem running your tests!\n");
+			echo("\033[0;31mNot so cool :( there was a problem running your tests!\033[0m\n");
 		}
 		
 		// Finally, test stats
