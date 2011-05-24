@@ -158,7 +158,7 @@ class UnitTest {
 	public function run_tests() {
 		$this->start_time = microtime(TRUE);
 		
-		set_error_handler(array($this, '_error_handler'));
+		set_error_handler(array($this, 'error_handler'));
 		
 		foreach ($this->tests as $test) {
 			$this->current_test = $test;
@@ -179,7 +179,7 @@ class UnitTest {
 		$this->end_time = microtime(TRUE);
 	}
 	
-	protected function _error_handler($no, $str) {
+	public function error_handler($no, $str) {
 		$this->error($str);
 	}
 	
@@ -222,7 +222,7 @@ class UnitTest {
 				echo($unit_test . "():\n");
 				
 				foreach ($messages as $message) {
-					echo("\t- " . $message);
+					echo("\t- " . $message."\n");
 				}
 				
 				echo("\n");
@@ -242,7 +242,7 @@ class UnitTest {
 				echo($unit_test . "():\n");
 				
 				foreach ($messages as $message) {
-					echo("\t- " . $message);
+					echo("\t- " . $message."\n");
 				}
 			}
 			
