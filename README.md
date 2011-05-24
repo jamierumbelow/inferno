@@ -123,6 +123,8 @@ $ php tests/calculator_test.php
 {"results":{"test_add":{"successes":[true]}},"assertion_count":0,"processing_time_seconds":"0.000051"}
 ```
 
+Check out the class itself for more information on which methods should be overloaded and what information is accessible through variables.
+
 ## License
 
 Copyright (c) 2011 Jamie Rumbelow <jamie@jamierumbelow.net>
