@@ -16,6 +16,8 @@ Grab a copy of the source from here or by cloning it. Then simply require the **
 Create a new test file in your application. We'll call it *tests/calculator_test.php*:
 
 ``` php
+<?php
+
 require 'lib/calculator.php';
 require 'lib/inferno.php';
 
@@ -31,6 +33,8 @@ Inferno::test();
 We'll also add the basic class and method so we don't get fatal errors:
 
 ``` php
+<?php
+
 class Calculator {
 	public static function add() { }
 }
@@ -58,7 +62,10 @@ Ran 1 assertion(s) in 0.000073 seconds
 
 We can implement our method...
 
-``` php 
+``` php
+<?php
+
+// ...
 	public static function add($one, $two) {
 		return $one + $two;
 	}
@@ -82,6 +89,8 @@ And we have a working test suite!
 Inferno contains a bunch of useful assertions to test your code. All the method names are self-explanatory, and if you get lost, dive into the code. It's exceedingly well commented and I'm going to fight to keep it that way.
 
 ``` php
+<?php
+
 public function assert($expression, $message = '');
 public function assert_true($expression, $message = '');
 public function assert_false($expression, $message = '');
@@ -95,6 +104,8 @@ public function assert_equivalent($one, $two, $message = '');
 Inferno is very easy to customise too. The test runner itself is part of the `UnitTest` class, and it is built up from several methods which you can overload. We'll subclass UnitTest and output the test results as JSON instead:
 
 ``` php
+<?php
+
 class JsonUnitTest extends UnitTest {
 	public function print_results() {
 		echo json_encode(array(
