@@ -95,7 +95,7 @@ class UnitTest {
 			throw new UnitTestFailure($message);
 		}
 	}
-	public function assert_true($e, $m) { $this->assert($e, $m); }
+	public function assert_true($e, $m = '') { $this->assert($e, $m); }
 	
 	/**
 	 * Assert that the expression is FALSE
