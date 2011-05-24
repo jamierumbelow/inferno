@@ -28,8 +28,51 @@ class CalculatorTest extends UnitTest {
 Inferno::test();
 ```
 
+We'll also add the basic class and method so we don't get fatal errors:
+
+``` php
+class Calculator {
+	public static function add() { }
+}
+```
+
 We can then run the tests by calling `php tests/calculator_test.php`:
 
 ``` bash
 $ php tests/calculator_test.php
+✘ 
+----------------------------------
+
+Failures!
+=========
+
+test_add():
+	- NULL doesn't equal 3
+
+
+----------------------------------
+
+Not so cool :( there was a problem running your tests!
+Ran 1 assertion(s) in 0.000073 seconds
 ```
+
+We can implement our method...
+
+``` php 
+	public static function add($one, $two) {
+		return $one + $two;
+	}
+```
+
+...and run our tests again...
+
+``` bash
+$ php tests/calculator_test.php
+✓ 
+----------------------------------
+
+Cool! All your tests ran perfectly.
+Ran 1 assertion(s) in 0.000058 seconds
+```
+
+And we have a working test suite!
