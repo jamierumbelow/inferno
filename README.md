@@ -77,6 +77,52 @@ Ran 1 assertion(s) in 0.000058 seconds
 
 And we have a working test suite!
 
+## Assertions
+
+Inferno contains a bunch of useful assertions to test your code. All the method names are self-explanatory, and if you get lost, dive into the code. It's exceedingly well commented and I'm going to fight to keep it that way.
+
+``` php
+public function assert($expression, $message = '');
+public function assert_true($expression, $message = '');
+public function assert_false($expression, $message = '');
+public function assert_equal($one, $two, $message = '');
+public function assert_not_equal($one, $two, $message = '');
+public function assert_equivalent($one, $two, $message = '');
+```
+
+## Customisation
+
+Inferno is very easy to customise too. The test runner itself is part of the `UnitTest` class, and it is built up from several methods which you can overload. We'll subclass UnitTest and output the test results as JSON instead:
+
+``` php
+class JsonUnitTest extends UnitTest {
+	public function print_results() {
+		echo json_encode(array(
+		
+			// $this->results is an array with all the test
+			// results from every test in this test case.
+			'results' => $this->results,
+			
+			// $this->assertion_count is the number of assertions
+			// the runner ran in total
+			'assertion_count' => $this->assertion_count,
+			
+			// $this->start_time and end_time are timestamps when
+			// the processing started and ended
+			'processing_time_seconds' => number_format(($this->end_time - $this->start_time), 6)
+			
+		);
+	}
+}
+```
+
+Just make sure your test class `extends` from `JsonUnitTest` and then when you run your tests...
+
+``` bash
+$ php tests/calculator_test.php
+{"results":{"test_add":{"successes":[true]}},"assertion_count":0,"processing_time_seconds":"0.000051"}
+```
+
 ## License
 
 Copyright (c) 2011 Jamie Rumbelow <jamie@jamierumbelow.net>
