@@ -45,7 +45,20 @@ class UnitTest {
 		foreach ($classes as $class) {
 			if (is_subclass_of($class, 'UnitTest')) {
 				$instance = new $class();
-				$instance->run();
+				
+				// Only run tests if we have a test_ method
+				$methods = get_class_methods($instance);
+				$run = FALSE;
+				
+				foreach ($methods as $method) {
+					if (substr($method, 0, 5) == 'test_') {
+						$run = TRUE;
+					}
+				}
+				
+				if ($run) {
+					$instance->run();
+				}
 			}
 		}
 	}
