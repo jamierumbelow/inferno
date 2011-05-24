@@ -72,6 +72,13 @@ class UnitTest {
 		$this->results[$this->current_test]['failures'][] = $message;
 	}
 	
+	/**
+	 * Record an error
+	 */
+	public function error($message) {
+		$this->results[$this->current_test]['errors'][] = $message;
+	}
+	
 	/* --------------------------------------------------------------
 	 * UNIT TESTING METHODS
 	 * ------------------------------------------------------------ */
@@ -151,6 +158,8 @@ class UnitTest {
 	public function run_tests() {
 		$this->start_time = microtime(TRUE);
 		
+		set_error_handler(array($this, '_error_handler'));
+		
 		foreach ($this->tests as $test) {
 			$this->current_test = $test;
 			
@@ -159,11 +168,19 @@ class UnitTest {
 			} catch (Exception $e) {
 				if (get_class($e) == 'UnitTestFailure') {
 					$this->failure($e->getMessage());
+				} else {
+					$this->error($e->getMessage());
 				}
 			}
 		}
 		
+		restore_error_handler();
+		
 		$this->end_time = microtime(TRUE);
+	}
+	
+	protected function _error_handler($no, $str) {
+		$this->error($str);
 	}
 	
 	/**
