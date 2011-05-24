@@ -16,8 +16,8 @@ Grab a copy of the source from here or by cloning it. Then simply require the **
 Create a new test file in your application. We'll call it *tests/calculator_test.php*:
 
 ``` php
-require '../lib/calculator.php'
-require '../lib/inferno.php'
+require 'lib/calculator.php';
+require 'lib/inferno.php';
 
 class CalculatorTest extends UnitTest {
 	public function test_add() {
