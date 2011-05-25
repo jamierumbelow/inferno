@@ -21,13 +21,13 @@ class UnitTest {
 	 * VARIABLES
 	 * ------------------------------------------------------------ */
 	
-	protected $results 			= array();
-	protected $tests 			= array();
-	protected $current_test 	= '';
-	                        	
-	protected $start_time 		= 0;
-	protected $end_time 		= 0;
-	protected $assertion_count	= 0;
+	public $results 		= array();
+	public $tests 			= array();
+	public $current_test 	= '';
+	
+	public $start_time 		= 0;
+	public $end_time 		= 0;
+	public $assertion_count	= 0;
 	
 	/* --------------------------------------------------------------
 	 * AUTORUNNER
