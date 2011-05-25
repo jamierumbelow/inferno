@@ -168,7 +168,7 @@ class UnitTest {
 	 * Assert that a value is an instance of a specific class
 	 */
 	public function assert_class($value, $class, $message = '') {
-		$message = ($message) ? $message : $this->_($value) . " is not an instance of the class '" . $class . "'";
+		$message = ($message) ? $message : $this->_($value) . " is not an instance of the class " . $class;
 		$this->assert((get_class($value) == $class), $message);
 	}
 	
@@ -346,12 +346,12 @@ class UnitTest {
 			return ($value) ? '<TRUE>' : '<FALSE>';
 		} elseif (is_array($value) && empty($value)) {
 			return '<Empty Array>';
-		} elseif (is_object($value) && empty($value)) {
-			return '<Empty Object: ' . get_class($value) .'>';
+		} elseif (is_object($value)) {
+			return '<Object: ' . get_class($value) .'>';
 		} elseif (is_string($value) && empty($value)) {
 			return '<Empty String>';
 		} else {
-			return $value;
+			return "<'$value'>";
 		}
 	}
 }
