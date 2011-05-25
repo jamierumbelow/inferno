@@ -29,6 +29,8 @@ class UnitTest {
 	public $end_time 		= 0;
 	public $assertion_count	= 0;
 	
+	public $next_assertion_quiet = FALSE;
+	
 	/* --------------------------------------------------------------
 	 * AUTORUNNER
 	 * ------------------------------------------------------------ */
@@ -113,8 +115,9 @@ class UnitTest {
 		} else {
 			$message = ($message) ? $message : $this->_($expression) . " doesn't equate to TRUE";
 			
-			if ($quiet) {
+			if ($quiet || $this->next_assertion_quiet) {
 				$this->failure($message);
+				$this->next_assertion_quiet = FALSE;
 			} else {
 				throw new UnitTestFailure($message);
 			}
@@ -313,6 +316,15 @@ class UnitTest {
 	 */
 	public function error_handler($no, $str) {
 		$this->error($str);
+	}
+	
+	/**
+	 * Make sure the next assertion doesn't
+	 * throw an exception
+	 */
+	public function assert_quietly() {
+		$this->next_assertion_quiet = TRUE;
+		return $this;
 	}
 	
 	/**
