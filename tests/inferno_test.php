@@ -35,6 +35,11 @@ class InfernoTest extends UnitTest {
 		}
 	}
 	
+	public function test_assert_logs_failure_but_carries_on_if_quiet_is_true() {
+		$this->assert_false($this->inferno->assert(FALSE, '', TRUE));
+		$this->assert_failure();
+	}
+	
 	public function test_assert_false() {
 		$this->inferno->assert_false(FALSE);
 		$this->assert_success();
@@ -42,6 +47,10 @@ class InfernoTest extends UnitTest {
 	
 	public function assert_success() {
 		$this->assert_true($this->inferno->results['inferno_test']['successes'][0]);
+	}
+	
+	public function assert_failure() {
+		$this->assert_equal($this->inferno->results['inferno_test']['failures'][0], "<FALSE> doesn't equate to TRUE");
 	}
 }
 

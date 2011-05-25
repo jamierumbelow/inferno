@@ -107,12 +107,17 @@ class UnitTest {
 	 * Assert that an expression is TRUE boolean. The
 	 * base for all the other assertions
 	 */
-	public function assert($expression, $message = '') {
+	public function assert($expression, $message = '', $quiet = FALSE) {
 		if ((bool)($expression) == TRUE) {
 			$this->success();
 		} else {
 			$message = ($message) ? $message : $this->_($expression) . " doesn't equate to TRUE";
-			throw new UnitTestFailure($message);
+			
+			if ($quiet) {
+				$this->failure($message);
+			} else {
+				throw new UnitTestFailure($message);
+			}
 		}
 	}
 	public function assert_true($e, $m = '') { $this->assert($e, $m); }
