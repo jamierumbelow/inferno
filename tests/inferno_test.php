@@ -85,6 +85,22 @@ class InfernoTest extends UnitTest {
 		$this->assert_failure();
 	}
 	
+	public function test_assert_type() {
+		$this->inferno->assert_type('some string', 'string');
+		$this->inferno->assert_quietly()->assert_type('some string', 'integer');
+		
+		$this->assert_success();
+		$this->assert_failure();
+	}
+	
+	public function test_assert_class() {
+		$this->inferno->assert_class($this->inferno, 'UnitTest');
+		$this->inferno->assert_quietly()->assert_class($this->inferno, 'SomeOtherClass');
+		
+		$this->assert_success();
+		$this->assert_failure();
+	}
+	
 	public function test_assert_not_empty() {
 		$this->inferno->assert_not_empty(array('some_content'));
 		$this->inferno->assert_quietly()->assert_not_empty(array());
