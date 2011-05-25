@@ -172,6 +172,14 @@ class UnitTest {
 		$this->assert((get_class($value) == $class), $message);
 	}
 	
+	/**
+	 * Assert that an array is not empty
+	 */
+	public function assert_not_empty($value, $message = '') {
+		$message = ($message) ? $message : $this->_($value) . " is empty!";
+		$this->assert(!empty($value), $message);
+	}
+	
 	/* --------------------------------------------------------------
 	 * TEST RUNNING METHODS
 	 * ------------------------------------------------------------ */
