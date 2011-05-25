@@ -99,6 +99,8 @@ public function assert_not_equal($one, $two, $message = '');
 public function assert_equivalent($one, $two, $message = '');
 public function assert_type($value, $type, $message = '');
 public function assert_class($value, $class, $message = '');
+public function assert_empty($value, $message = '');
+public function assert_not_empty($value, $message = '');
 ```
 
 ## Customisation
