@@ -317,6 +317,8 @@ class UnitTest {
 	public function _($value) {
 		if (is_null($value)) {
 			return '<Null>';
+		} elseif (is_bool($value)) {
+			return ($value) ? '<TRUE>' : '<FALSE>';
 		} elseif (is_array($value) && empty($value)) {
 			return '<Empty Array>';
 		} elseif (is_object($value) && empty($value)) {
