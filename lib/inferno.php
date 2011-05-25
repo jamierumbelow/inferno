@@ -250,6 +250,7 @@ class UnitTest {
 		$failures = array();
 		$errors = array();
 		$good = TRUE;
+		$i = 1;
 		
 		// Print out the running status of each method.
 		foreach ($this->results as $unit_test => $results) {
@@ -264,11 +265,18 @@ class UnitTest {
 						default:
 						case 'successes': echo('✓ '); break;
 					}
+					
+					$i++;
+					
+					if ($i == 20) {
+						echo("\n");
+						$i = 1;
+					}
 				}
 			}
 		}
 		
-		echo("\n----------------------------------\n\n");
+		echo("\n-------------------------------------\n\n");
 		
 		// Do we have any failures?
 		if ($failures) {
@@ -287,7 +295,7 @@ class UnitTest {
 				echo("\n");
 			}
 			
-			echo("\n----------------------------------\n\n");
+			echo("\n-------------------------------------\n\n");
 		}
 		
 		// Do we have any failures?
@@ -305,7 +313,7 @@ class UnitTest {
 				}
 			}
 			
-			echo("\n----------------------------------\n\n");
+			echo("\n-------------------------------------\n\n");
 		}
 		
 		// Good or bad?
