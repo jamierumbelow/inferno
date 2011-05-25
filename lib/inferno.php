@@ -141,6 +141,22 @@ class UnitTest {
 		$this->assert(($one === $two), $message);
 	}
 	
+	/**
+	 * Assert that a value is a specific type (using gettype())
+	 */
+	public function assert_type($value, $type, $message = '') {
+		$message = ($message) ? $message : $this->_($value) . " is not the type '" . $type . "'";
+		$this->assert((gettype($value) == $type), $message);
+	}
+	
+	/**
+	 * Assert that a value is an instance of a specific class
+	 */
+	public function assert_class($value, $class, $message = '') {
+		$message = ($message) ? $message : $this->_($value) . " is not an instance of the class '" . $class . "'";
+		$this->assert((get_class($value) == $class), $message);
+	}
+	
 	/* --------------------------------------------------------------
 	 * TEST RUNNING METHODS
 	 * ------------------------------------------------------------ */

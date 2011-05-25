@@ -97,6 +97,8 @@ public function assert_false($expression, $message = '');
 public function assert_equal($one, $two, $message = '');
 public function assert_not_equal($one, $two, $message = '');
 public function assert_equivalent($one, $two, $message = '');
+public function assert_type($value, $type, $message = '');
+public function assert_class($value, $class, $message = '');
 ```
 
 ## Customisation
