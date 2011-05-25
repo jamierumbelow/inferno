@@ -111,7 +111,7 @@ class UnitTest {
 		if ((bool)($expression) == TRUE) {
 			$this->success();
 		} else {
-			$message = ($message) ? $message : (string)($expression) . " doesn't equate to TRUE";
+			$message = ($message) ? $message : $this->_($expression) . " doesn't equate to TRUE";
 			throw new UnitTestFailure($message);
 		}
 	}
@@ -316,7 +316,13 @@ class UnitTest {
 	 */
 	public function _($value) {
 		if (is_null($value)) {
-			return 'NULL';
+			return '<Null>';
+		} elseif (is_array($value) && empty($value)) {
+			return '<Empty Array>';
+		} elseif (is_object($value) && empty($value)) {
+			return '<Empty Object: ' . get_class($value) .'>';
+		} elseif (is_string($value) && empty($value)) {
+			return '<Empty String>';
 		} else {
 			return $value;
 		}
