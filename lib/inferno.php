@@ -92,6 +92,13 @@ class UnitTest {
 		$this->results[$this->current_test]['errors'][] = $message;
 	}
 	
+	/**
+	 * Overload these methods to have code called
+	 * before each test
+	 */
+	public function set_up() { /* Overload */ }
+	public function tear_down() { /* Overload */ }
+	
 	/* --------------------------------------------------------------
 	 * UNIT TESTING METHODS
 	 * ------------------------------------------------------------ */
@@ -191,6 +198,7 @@ class UnitTest {
 		
 		foreach ($this->tests as $test) {
 			$this->current_test = $test;
+			$this->set_up();
 			
 			try {
 				call_user_func_array(array($this, $test), array());
@@ -201,6 +209,8 @@ class UnitTest {
 					$this->error($e->getMessage());
 				}
 			}
+			
+			$this->tear_down();
 		}
 		
 		restore_error_handler();
