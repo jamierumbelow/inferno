@@ -25,7 +25,7 @@ class InfernoTest extends UnitTest {
 	}
 	
 	/* --------------------------------------------------------------
-	 * TEST CASES
+	 * ASSERTION TEST CASES
 	 * ------------------------------------------------------------ */
 	
 	public function test_assert_marks_a_success_on_a_successful_test() {
@@ -107,6 +107,30 @@ class InfernoTest extends UnitTest {
 		
 		$this->assert_success();
 		$this->assert_failure();
+	}
+	
+	/* --------------------------------------------------------------
+	 * RUNNER TEST CASES
+	 * ------------------------------------------------------------ */
+	
+	public function test_get_tests() {
+		$inferno = new InfernoTest();
+		$inferno->get_tests();
+		
+		$this->assert_not_empty($inferno->tests);
+		$this->assert(in_array('test_get_tests', $inferno->tests));
+	}
+	
+	public function test_run_tests() {
+		$inferno = new InfernoTest();
+		$inferno->tests[] = 'run_tests_test_method';
+		$inferno->parent = $this;
+		
+		$inferno->run_tests();
+	}
+	
+	public function run_tests_test_method() {
+		$this->parent->success();
 	}
 	
 	/* --------------------------------------------------------------
