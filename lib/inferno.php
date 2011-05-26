@@ -188,6 +188,22 @@ class UnitTest {
 		$this->assert(!empty($value), $message);
 	}
 	
+	/**
+	 * Assert that an array has a key
+	 */
+	public function assert_has_key($array, $key, $message = '') {
+		$message = ($message) ? $message : $this->_($array) . " does not have the key " . $this->_($key);
+		$this->assert(isset($array[$key]), $message);
+	}
+	
+	/**
+	 * Assert that an array doesn't have a key
+	 */
+	public function assert_doesnt_have_key($array, $key, $message = '') {
+		$message = ($message) ? $message : $this->_($array) . " has the key " . $this->_($key);
+		$this->assert(!isset($array[$key]), $message);
+	}
+	
 	/* --------------------------------------------------------------
 	 * TEST RUNNING METHODS
 	 * ------------------------------------------------------------ */

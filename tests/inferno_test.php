@@ -117,6 +117,22 @@ class InfernoTest extends UnitTest {
 		$this->assert_failure();
 	}
 	
+	public function test_assert_has_key() {
+		$this->inferno->assert_has_key(array('key' => 'value'), 'key');
+		$this->inferno->assert_quietly()->assert_has_key(array('key' => 'value'), 'other key');
+		
+		$this->assert_success();
+		$this->assert_failure();
+	}
+	
+	public function test_assert_doesnt_have_key() {
+		$this->inferno->assert_doesnt_have_key(array('key' => 'value'), 'some key');
+		$this->inferno->assert_quietly()->assert_doesnt_have_key(array('key' => 'value'), 'key');
+		
+		$this->assert_success();
+		$this->assert_failure();
+	}
+	
 	/* --------------------------------------------------------------
 	 * RUNNER TEST CASES
 	 * ------------------------------------------------------------ */
